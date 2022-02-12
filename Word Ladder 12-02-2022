@@ -63,7 +63,7 @@ public:
 
 
 
-CODE 2 ----------------------->
+SECOND CODE----------------------->
 
 
 class Solution {
@@ -80,21 +80,7 @@ class Solution {
         }
         return true;
     }
-    // vector<string> func(unordered_map<string,int>& mp, string s) {
-    //     vector<string> res;
-    //     for(int i = 0;i < s.size();i++) {
-    //         char temp = s[i];
-    //         for(char ch = 'a'; ch <= 'z';ch++) {
-    //             s[i] = ch;
-    //             if(ch != temp) {
-    //                 if(mp.find(s) != mp.end())
-    //                     res.push_back(s);
-    //             }
-    //         }
-    //         s[i] = temp;
-    //     }
-    //     return res;
-    // }
+    
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
         int n = wordList.size();
