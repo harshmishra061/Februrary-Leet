@@ -1,4 +1,9 @@
 // This code is easy to understand but give TLE.
+// Optimal code is given below ()
+FIRST CODE------------------>
+
+
+
 class Solution {
     private:
     // function for checking whether there is only one character difference in between a and b or not.
@@ -47,6 +52,87 @@ public:
                 for(string ss : mp[s]) {
                     if(!visited.count(ss)) {
                         q.push(ss);
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+};
+
+
+
+
+CODE 2 ----------------------->
+
+
+class Solution {
+    private:
+    bool isDiffByOne(string a, string b) {
+        bool isone = false;
+        for(int i = 0;i < a.size();i++) {
+            if(a[i] != b[i]) {
+                if(isone) {
+                    return false;
+                }
+                isone = true;
+            }
+        }
+        return true;
+    }
+    // vector<string> func(unordered_map<string,int>& mp, string s) {
+    //     vector<string> res;
+    //     for(int i = 0;i < s.size();i++) {
+    //         char temp = s[i];
+    //         for(char ch = 'a'; ch <= 'z';ch++) {
+    //             s[i] = ch;
+    //             if(ch != temp) {
+    //                 if(mp.find(s) != mp.end())
+    //                     res.push_back(s);
+    //             }
+    //         }
+    //         s[i] = temp;
+    //     }
+    //     return res;
+    // }
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        int n = wordList.size();
+        unordered_map<string,vector<string>> mp;
+        //creation of map
+        int m = wordList[0].size();
+        //here we are creating all the keys e.g key of cat are *at,c*t,ca*. And also pushing string which are corresponds to the key.
+        for(int i = 0;i < n;i++) {
+            for(int j = 0; j < m;j++){
+                string key = wordList[i].substr(0,j)+'*'+wordList[i].substr(j+1);
+                mp[key].push_back(wordList[i]);
+            }
+        }
+        // this is for beginWord
+        for(int j = 0; j < m;j++){
+            string key = beginWord.substr(0,j)+'*'+beginWord.substr(j+1);
+            mp[key].push_back(beginWord);
+        }
+        
+        // Level Order Traversal
+        set<string> visited;
+        queue<string> q;
+        q.push(beginWord);
+        int level = 0;
+        while(!q.empty()) {
+            level++;
+            int size = q.size();
+            for(int i = 0;i < size;i++) {
+                string s = q.front(); q.pop();
+                visited.insert(s);
+                if(s == endWord) return level;
+                //If s is not endWord, generate all key (if two strings have same key, they can be changed in one another) and push all string in which currstring(i.e. s) can be changed.
+                for(int j = 0; j < m;j++){
+                    string key = s.substr(0,j)+'*'+s.substr(j+1);
+                    for(string ss : mp[key]) {
+                        if(!visited.count(ss)) {
+                            q.push(ss);
+                        }
                     }
                 }
             }
