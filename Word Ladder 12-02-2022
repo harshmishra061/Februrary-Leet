@@ -5,6 +5,7 @@ FIRST CODE------------------>
 
 
 class Solution {
+	checking how to use git and github
     private:
     // function for checking whether there is only one character difference in between a and b or not.
     bool isDiffByOne(string a, string b) {
